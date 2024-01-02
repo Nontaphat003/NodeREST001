@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node CRUDBookNoDB.js",
+    "dev": "nodemon CRUDBookNoDB.js",
     "format": "prettier --write *.js"
   },
   "keywords": [],
