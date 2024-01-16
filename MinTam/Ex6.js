@@ -1,3 +1,4 @@
+// เอาข้อมูลที่ไม่ซ้ำ
 // removedups([1, 0, 1, 0]) ➞ [1, 0]
 // removedups(["The", "big", "cat"]) ➞ ["The", "big", "cat"]
 // removedups(["John", "Taylor", "John"]) ➞ ["John", "Taylor"]
