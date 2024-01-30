@@ -17,6 +17,11 @@ app.listen(port,
 //
 //
 //
+//
+//
+//
+//
+//
 
 const express = require('express');
 const sqlite3 = require('sqlite3');
@@ -41,7 +46,7 @@ app.get('/books', (req, res) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.json(rows);
+            res.json(row);
         }
     });
 });
@@ -98,7 +103,7 @@ app.delete('/books/:id', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
 
 
 
