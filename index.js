@@ -1,24 +1,16 @@
-//
-//
-//
-//
-
 const express = require('express');
 const Sequelize = require('sequelize');
-const qpp = express();
+const app = express();
 
-// parse incoming requests
-application.use(express.json());
+app.use(express.json());
 
-// create a connection to the database
-const sequelize = new Sequelize('database','username','password',{
-    host: 'localhost',
-    dialect: 'sqlite',
+const sequelize =  new Sequelize('database' , 'username' , 'password', {
+    host: 'localhost' ,
+    dialect: 'sqlite' ,
     storage: './Database/SQBooks.sqlite'
 });
 
-// define the Book model
-const Book = sequelize.define('book',{
+const Book = sequelize.define('book', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -26,31 +18,28 @@ const Book = sequelize.define('book',{
     },
     title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull:false
     },
     author: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull:false
     }
 });
 
-// create the books table if it doesn't exist
 sequelize.sync();
 
-// route to get all books
-app.get('/book', (req, res) => {
-    Book.findAll().then(books => {
+app.get('/book',(req,res) => {
+    Book.findAll().then(book => {
         res.json(books);
     }).catch(err => {
         res.status(500).send(err);
     });
 });
 
-// route to get a book by id
-app.get('/book/:id', (req, res) => {
+app.get('/books/:id' ,(req,res) => {
     Book.findByPk(req.params.id).then(book => {
         if (!book) {
-            res.status(404).send('Book not found');
+            res.status(404).send('Book now found');
         } else {
             res.json(book);
         }
@@ -59,8 +48,7 @@ app.get('/book/:id', (req, res) => {
     });
 });
 
-// route to create a new book
-app.post('/books', (req, res) => {
+app.post('/books',(req, res) => {
     Book.create(req.body).then(book => {
         res.send(book);
     }).catch(err => {
@@ -68,10 +56,9 @@ app.post('/books', (req, res) => {
     });
 });
 
-// route to update a book
-app.put('/book/:id', (req,res) => {
+app.put('/books/:id', (req,res) => {
     Book.findByPk(req.params.id).then(book => {
-        if (!book) {
+        if(!book) {
             res.status(404).send('Book not found');
         } else {
             book.update(req.body).then(() => {
@@ -85,24 +72,21 @@ app.put('/book/:id', (req,res) => {
     });
 });
 
-// route to delete a book
-app.delete('/book/:id', (req,res) => {
+app.delete('/books/:id' , (req,res) => {
     Book.findByPk(req.params.id).then(book => {
-        if (!book) {
-            res.status(404).send('Book not found');
+        if(!book) {
+            res.status(404).send("Book mot found");
         } else {
             book.destroy().then(() => {
                 res.send({});
             }).catch(err => {
-                res.send(500).send(err);
+                res.status(500).send(err);
             });
         }
     }).catch(err => {
         res.status(500).send(err);
     });
-});
+}); 
 
-// start the sever
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-
