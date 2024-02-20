@@ -6,7 +6,7 @@ mongoose.connect(
     "mongodb://admin:BCAmpm66377@node58273-noderest0.proen.app.ruk-com.cloud",
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     }
 )
 
